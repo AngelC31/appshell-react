@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 function App() {
+  const lista = document.querySelector("#lista");
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+      let html = "";
+      json.forEach(user => {
+        html += `<div class="card">
+            <h2>${user.name}</h2>
+            <div>${user.email}</div>
+            </div>`
+      })
+      lista.innerHTML=html;
+    })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <body>
+        <header>
+          Lista
+        </header>
+        <div id="lista"></div>
+      </body>
+      <footer>
+        <h3>Hecho por Angel Cruz de IDGS10A</h3>
+      </footer>
     </div>
   );
 }
